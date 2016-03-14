@@ -37,6 +37,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(3, 3));
@@ -60,23 +63,29 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton3.setText("Budget Planner");
         getContentPane().add(jButton3);
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Holiday Manager");
         getContentPane().add(jButton4);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("Add Event");
         getContentPane().add(jButton5);
 
-        jButton6.setText("jButton6");
+        jButton6.setText("General Formaulae");
         getContentPane().add(jButton6);
 
-        jButton7.setText("jButton7");
+        jButton7.setText("Subject Cut-offs");
         getContentPane().add(jButton7);
 
-        jButton8.setText("jButton8");
+        jButton8.setText("Check Details");
         getContentPane().add(jButton8);
-
-        jButton9.setText("jButton9");
         getContentPane().add(jButton9);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,5 +149,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

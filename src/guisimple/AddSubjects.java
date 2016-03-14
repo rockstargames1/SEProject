@@ -184,9 +184,9 @@ DatabaseStudent db;
                         "TOTAL INT);"; 
     try {
         db.stmt.executeUpdate(sql);
-        System.out.println("Table Successfully Created");
+        System.out.println("Attendance Table Successfully Created");
     } catch (SQLException ex) {
-        
+        System.err.println(ex);
     }
     }
 }

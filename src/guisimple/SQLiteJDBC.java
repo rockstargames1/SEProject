@@ -27,24 +27,27 @@ public class SQLiteJDBC {
       System.out.println("Opened database successfully");
 
       stmt = c.createStatement();
-     String sql = "DROP TABLE ATTENDANCE"; 
-
+     /*String sql = "DROP TABLE ATTENDANCE";
      stmt.executeUpdate(sql);
-     /* String sql = "select * from attendance;";
+     System.out.println("Dropped successfully"); 
+     sql = "DROP TABLE TIMETABLE";
+     stmt.executeUpdate(sql);
+     System.out.println("Dropped successfully");*/
+     
+      String sql = "select * from timetable;";
       
       ResultSet rs = stmt.executeQuery(sql);
       rs.next();
       do{
-      System.out.println(rs.getString(1)+" "+rs.getInt(2)+" "+rs.getInt(3));    
+      System.out.println(rs.getString(1)+" "+rs.getString(2));    
       }
       while(rs.next());
-      */
+      
       stmt.close();
       c.close();
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
-    System.out.println("Dropped successfully");
   }
 }

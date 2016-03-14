@@ -99,6 +99,14 @@ public class TimeTableUpdateForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String sql = "insert into timetable values('"
+                        +jComboBox1.getSelectedItem().toString()+"','"+
+                        jList1.getSelectedValue().toString()+"');";
+        try {
+            db.stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Already Added");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -155,8 +163,14 @@ public class TimeTableUpdateForm extends javax.swing.JFrame {
                 i++;
             }
             jList1.setListData(s);
-            
+            sql = "CREATE TABLE timetable ("+
+                    "DAY VARCHAR(10),"
+                    + "SUBJECT VARCHAR(10),"+
+                    "PRIMARY KEY(DAY,SUBJECT));";
+            System.out.println(sql);
+            db.stmt.executeUpdate(sql);
         } catch (SQLException ex) {
+            System.err.println(ex);
             JOptionPane.showMessageDialog(rootPane, "Subjects Not Added");
             System.exit(1);
         }
