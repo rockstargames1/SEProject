@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class DatabaseStudent {
    protected Statement stmt;
    protected Connection con;
-   ResultSet rs;
     public DatabaseStudent()
     {
        try {

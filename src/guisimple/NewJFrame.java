@@ -5,12 +5,18 @@
  */
 package guisimple;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author kishl_000
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    DatabaseStudent db;
     /**
      * Creates new form NewJFrame
      */
@@ -98,10 +104,27 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        AddSubjects f1 = new AddSubjects();
-        this.setVisible(false);
-        f1.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            db = new DatabaseStudent();
+            UpdateAttendanceForm u1 = new UpdateAttendanceForm();
+            this.setVisible(false);
+            u1.setVisible(true);
+            //Check if attendance table exists and open view accordingly
+            
+            
+            String sql = "select * from attendance;";
+            db.stmt.executeQuery(sql);
+            db.closeConnections();
+            
+            
+        } catch (SQLException ex) {
+            db.closeConnections();
+            System.err.println(ex);
+            AddSubjects f1 = new AddSubjects();
+            this.setVisible(false);
+            f1.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
