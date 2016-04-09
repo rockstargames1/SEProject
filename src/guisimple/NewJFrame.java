@@ -76,6 +76,11 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().add(jButton5);
 
         jButton6.setText("General Formaulae");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6);
 
         jButton7.setText("Subject Cut-offs");
@@ -126,6 +131,13 @@ public class NewJFrame extends javax.swing.JFrame {
             f1.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        FormulaeForm f1 = new FormulaeForm();
+        this.setVisible(false);
+        f1.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
