@@ -7,6 +7,7 @@ package guisimple;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -45,10 +46,10 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         deposit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        expdCheck = new javax.swing.JButton();
+        UpdtExpd = new javax.swing.JButton();
         withdraw = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        extraExp = new javax.swing.JButton();
         addWeeklyExp = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -66,9 +67,19 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Check Expenditures");
+        expdCheck.setText("Check Expenditures");
+        expdCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expdCheckActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Update Weekly Expenditures");
+        UpdtExpd.setText("Update Weekly Expenditures");
+        UpdtExpd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdtExpdActionPerformed(evt);
+            }
+        });
 
         withdraw.setText("Withdrawal");
         withdraw.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +88,12 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Extra Expenditure");
+        extraExp.setText("Extra Expenditure");
+        extraExp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extraExpActionPerformed(evt);
+            }
+        });
 
         addWeeklyExp.setText("Add Weekly Expenditure");
         addWeeklyExp.addActionListener(new java.awt.event.ActionListener() {
@@ -104,11 +120,11 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
                         .addGap(137, 137, 137)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deposit)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5))
+                            .addComponent(UpdtExpd)
+                            .addComponent(extraExp))
                         .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(expdCheck)
                             .addComponent(withdraw)
                             .addComponent(addWeeklyExp)))
                     .addGroup(layout.createSequentialGroup()
@@ -127,11 +143,11 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
                     .addComponent(withdraw))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(UpdtExpd)
+                    .addComponent(expdCheck))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(extraExp)
                     .addComponent(addWeeklyExp))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
@@ -139,6 +155,12 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    //Deposit
+    
+    
+    
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
         // TODO add your handling code here:
         try {
@@ -146,7 +168,7 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
         ResultSet rs = db.stmt.executeQuery(sql);
         JTextField bal = new JTextField("Enter Deposit Amount");
      final JComponent[] inputs = new JComponent[] {
-		new JLabel("Cuurent Bal: "+rs.getInt(1))
+		new JLabel("Current Bal: "+rs.getInt(1))
              ,bal
 };
 
@@ -171,6 +193,10 @@ catch(SQLException ex)
     }
     }//GEN-LAST:event_depositActionPerformed
 
+    
+    //Withdrawal
+    
+    
     private void withdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawActionPerformed
         // TODO add your handling code here:
         try {
@@ -208,6 +234,12 @@ catch(SQLException ex)
         
     }//GEN-LAST:event_withdrawActionPerformed
 
+    
+    
+    //Add new Weekly Expenditure
+    
+    
+    
     private void addWeeklyExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWeeklyExpActionPerformed
         // TODO add your handling code here:
         JTextField type = new JTextField();
@@ -233,6 +265,93 @@ catch(SQLException ex)
             
         }
     }//GEN-LAST:event_addWeeklyExpActionPerformed
+
+    
+    //Weekly Updates
+    
+    
+    private void UpdtExpdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdtExpdActionPerformed
+        // TODO add your handling code here:
+        try {
+            //Get Remaining Amount
+            int rem = Integer.parseInt(jLabel1.getText().substring(4));
+            int sum = 0;
+            //Get the Expenditures
+            String sql = "select amount from budget where use <> 'acc_bal' and use <> 'rem_amt' and use <> 'weeklybudget';";
+            ResultSet rs = db.stmt.executeQuery(sql);
+            
+            //Update the Expenditures
+            while(rs.next())
+                sum+=rs.getInt(1);
+            
+            //Update Remaining amount
+            if(sum <= rem)
+            {
+                sql = "update  budget set amount=" + (rem-sum) +" where use='rem_amt';";
+                System.out.println(sql);
+                db.stmt.executeUpdate(sql);
+                JOptionPane.showMessageDialog(rootPane, "Successfullly Updated");
+                loadData();
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Insufficient Balance");
+        }
+        catch(SQLException ex)
+        {
+            System.err.println(ex);
+        }
+        
+    }//GEN-LAST:event_UpdtExpdActionPerformed
+
+    
+    //Extra Expenditure
+    
+    
+    private void extraExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extraExpActionPerformed
+        // TODO add your handling code here:
+        try {
+            JTextField  amt = new JTextField();
+            JComponent  inputs[] = new JComponent[] {
+                new JLabel("Enter Amount"),
+                amt
+            };
+            int result = JOptionPane.showConfirmDialog(null, inputs, "Extra Expenditure Amount", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null);
+            if(result == JOptionPane.OK_OPTION)
+            {
+                int rem = (Integer.parseInt(jLabel1.getText().substring(4)) - Integer.parseInt(amt.getText()));
+                String sql = "update budget set amount="+rem+" where use='rem_amt';";
+                System.out.println(sql);
+                db.stmt.executeUpdate(sql);
+                loadData();
+            }
+        }
+        catch(SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_extraExpActionPerformed
+
+    
+    //Check Weekly Expenditures
+    
+    
+    private void expdCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expdCheckActionPerformed
+        // TODO add your handling code here:
+        try {
+            JComponent inputs[] = new JComponent[10];
+            int count=0;
+            String sql = "select * from budget where use <> 'acc_bal' and use <> 'rem_amt' and use <> 'weeklybudget';";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                inputs[count++] = new JLabel(rs.getString(1)+ ":" +rs.getInt(2));
+            }
+        JOptionPane.showMessageDialog(null, inputs, "Weekly Expenditures List", JOptionPane.PLAIN_MESSAGE, null);
+        }
+        catch(SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_expdCheckActionPerformed
     
     /**
      * @param args the command line arguments
@@ -270,11 +389,11 @@ catch(SQLException ex)
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton UpdtExpd;
     private javax.swing.JButton addWeeklyExp;
     private javax.swing.JButton deposit;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton expdCheck;
+    private javax.swing.JButton extraExp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

@@ -46,12 +46,12 @@
                       <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="deposit" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="UpdtExpd" min="-2" max="-2" attributes="0"/>
+                          <Component id="extraExp" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="expdCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="withdraw" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="addWeeklyExp" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -77,12 +77,12 @@
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="UpdtExpd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="expdCheck" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="extraExp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addWeeklyExp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="101" max="32767" attributes="0"/>
@@ -107,15 +107,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="depositActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="expdCheck">
       <Properties>
         <Property name="text" type="java.lang.String" value="Check Expenditures"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="expdCheckActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="UpdtExpd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Weekly Expenditures"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdtExpdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="withdraw">
       <Properties>
@@ -125,10 +131,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="withdrawActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="extraExp">
       <Properties>
         <Property name="text" type="java.lang.String" value="Extra Expenditure"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="extraExpActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addWeeklyExp">
       <Properties>
