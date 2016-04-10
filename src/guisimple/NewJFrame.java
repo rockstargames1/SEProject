@@ -5,10 +5,16 @@
  */
 package guisimple;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -23,6 +29,8 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         setSize(600,600);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);
     }
 
@@ -67,6 +75,11 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().add(jButton2);
 
         jButton3.setText("Budget Planner");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
 
         jButton4.setText("Holiday Manager");
@@ -112,15 +125,21 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             db = new DatabaseStudent();
-            UpdateAttendanceForm u1 = new UpdateAttendanceForm();
-            this.setVisible(false);
-            u1.setVisible(true);
+            
             //Check if attendance table exists and open view accordingly
             
             
             String sql = "select * from attendance;";
             db.stmt.executeQuery(sql);
             db.closeConnections();
+            
+            
+            //
+            
+            
+            UpdateAttendanceForm u1 = new UpdateAttendanceForm();
+            this.setVisible(false);
+            u1.setVisible(true);
             
             
         } catch (SQLException ex) {
@@ -138,6 +157,92 @@ public class NewJFrame extends javax.swing.JFrame {
         this.setVisible(false);
         f1.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        db = new DatabaseStudent();
+        try {
+            String sql = "select * from budget;";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            db.closeConnections();
+            BudgetPlannerForm f1 = new BudgetPlannerForm();
+            this.setVisible(false);
+            f1.setVisible(true);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            
+            try {
+
+                //Accept the Budget and Account Balance
+                
+                JTextField bal = new JTextField();
+                JTextField bud = new JTextField();
+                
+               final JComponent cinputs[] = new JComponent[] {
+                    new JLabel("Account Balance"),
+                    bal,
+                    new JLabel("Weekly Budget"),
+                    bud
+                };
+               
+               int result = JOptionPane.showConfirmDialog(rootPane, cinputs, "Update Details", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+               
+               //insert balance and budget to budget table
+               
+               if(result == JOptionPane.OK_OPTION)
+               {
+                   //create Table
+                   
+                   String sql = "CREATE TABLE BUDGET (USE VARCHAR(15) PRIMARY KEY,AMOUNT INT);";
+                   System.out.println(sql);
+                   db.stmt.execute(sql);
+                   System.out.println("Budget Table Created");
+                   
+                   
+                   //create balance entry
+                   
+                   sql = "insert into budget values('acc_bal'," +bal.getText() +")";
+                   System.out.println(sql);
+                   db.stmt.execute(sql);
+                   
+                   
+                   //create budget entry
+                   
+                   sql = "insert into budget values('weeklybudget'," +bud.getText() +")";
+                   System.out.println(sql);
+                   db.stmt.execute(sql);
+                   
+                   
+                   //create remaining amount entry
+                   
+                   sql = "insert into budget values('rem_amt'," +bud.getText() +")";
+                   System.out.println(sql);
+                   db.stmt.execute(sql);
+                   
+                   
+                   //Open Budget Page
+                   
+                   db.closeConnections();
+                   BudgetPlannerForm f1 = new BudgetPlannerForm();
+                   this.setVisible(false);
+                   f1.setVisible(true);
+                   
+               }
+               
+               
+            } catch (SQLException ex1) {
+                System.err.println(ex1);
+            }
+            
+        }
+        
+         
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
