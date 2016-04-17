@@ -22,7 +22,7 @@ public class FormulaeForm extends javax.swing.JFrame {
     public FormulaeForm() {
         initComponents();
         setSize(360,360);
-        this.setTitle("Virtual Student");
+        this.setTitle("Formulae");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);
@@ -84,7 +84,7 @@ public class FormulaeForm extends javax.swing.JFrame {
         });
         getContentPane().add(physics);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Go To");
 
         backbutton.setText("Back");
         backbutton.addActionListener(new java.awt.event.ActionListener() {

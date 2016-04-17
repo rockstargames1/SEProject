@@ -36,7 +36,7 @@ public class UpdateDetailsForm extends javax.swing.JFrame {
         name = new JTextField();
         name.setBounds(262, 190, 220, 31);
         this.add(name);
-        this.setTitle("Virtual Student");
+        this.setTitle("Update Details");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         backbutton.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Images\\back_button.png"));

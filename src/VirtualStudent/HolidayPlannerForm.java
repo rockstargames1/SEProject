@@ -37,7 +37,7 @@ public class HolidayPlannerForm extends javax.swing.JFrame {
     public HolidayPlannerForm() {
         initComponents();
         setSize(720,500);
-        this.setTitle("Virtual Student");
+        this.setTitle("Holiday Planner");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);

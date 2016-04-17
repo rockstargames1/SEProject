@@ -34,7 +34,7 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
     public UpdateAttendanceForm() {
         initComponents();
         setSize(620,500);
-        this.setTitle("Virtual Student");
+        this.setTitle("Update Attendance");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);

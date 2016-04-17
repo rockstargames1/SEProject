@@ -35,7 +35,7 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
     public BudgetPlannerForm() {
         initComponents();
         setSize(700,600);
-        this.setTitle("Virtual Student");
+        this.setTitle("Budget Planner");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);

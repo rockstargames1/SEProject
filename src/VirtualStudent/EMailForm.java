@@ -35,19 +35,19 @@ import javax.swing.JOptionPane;
  *
  * @author kishl_000
  */
-public class EventsForm extends javax.swing.JFrame {
+public class EMailForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form EventsForm
+     * Creates new form EMailForm
      */
     DatabaseStudent db;
     String emailid;
     String path;
     
-    public EventsForm() {
+    public EMailForm() {
         initComponents();
         path = null;
-        this.setTitle("Virtual Student");
+        this.setTitle("E-Mail");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);
@@ -206,20 +206,21 @@ public class EventsForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EventsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EMailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EventsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EMailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EventsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EMailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EventsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EMailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EventsForm().setVisible(true);
+                new EMailForm().setVisible(true);
             }
         });
     }
@@ -303,10 +304,10 @@ public class EventsForm extends javax.swing.JFrame {
          // Send message
          Transport.send(message);
 
-         JOptionPane.showMessageDialog(null ,"Sent message successfully....");
+         JOptionPane.showMessageDialog(null ,"Message Sent");
 
-      } catch (MessagingException e) {
-            throw new RuntimeException(e);
+      } catch (MessagingException ex) {
+            System.err.println(ex);
       }
     }
 }
