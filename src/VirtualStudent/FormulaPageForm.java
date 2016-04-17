@@ -5,7 +5,9 @@
  */
 package VirtualStudent;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -25,10 +27,13 @@ public class FormulaPageForm extends javax.swing.JFrame {
     public FormulaPageForm(int x,int y,int height,int width,String url) {
         initComponents();
         setSize(height,width);
-        setResizable(false);
         this.x = x;
         this.y = y;
         this.url = url;
+        this.setTitle("Virtual Student");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        setResizable(false);
     }
 
     /**

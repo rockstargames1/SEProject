@@ -5,10 +5,15 @@
  */
 package VirtualStudent;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -21,6 +26,12 @@ public class AttendanceForm extends javax.swing.JFrame {
      */
     public AttendanceForm() {
         initComponents();
+        setSize(650,650);
+        this.setTitle("Virtual Student");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        setResizable(false);
+        backbutton.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Images\\back_button.png"));
         readFromDatabase();
     }
 
@@ -61,9 +72,7 @@ public class AttendanceForm extends javax.swing.JFrame {
         per4 = new javax.swing.JLabel();
         per5 = new javax.swing.JLabel();
         per6 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        backbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,20 +132,21 @@ public class AttendanceForm extends javax.swing.JFrame {
 
         per6.setText("0");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        backbutton.setMaximumSize(new java.awt.Dimension(50, 50));
+        backbutton.setMinimumSize(new java.awt.Dimension(50, 50));
+        backbutton.setPreferredSize(new java.awt.Dimension(50, 50));
+        backbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(subject5, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,8 +171,7 @@ public class AttendanceForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(48, 48, 48))
+                        .addComponent(jLabel4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -189,18 +198,23 @@ public class AttendanceForm extends javax.swing.JFrame {
                                 .addComponent(sub6total)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(per6)))
-                        .addGap(72, 72, 72))))
+                        .addGap(24, 24, 24)))
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subject1)
                     .addComponent(sub1attended)
@@ -236,11 +250,30 @@ public class AttendanceForm extends javax.swing.JFrame {
                     .addComponent(sub6attended)
                     .addComponent(sub6total)
                     .addComponent(per6))
-                .addGap(151, 151, 151))
+                .addGap(69, 69, 69))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            DatabaseStudent db = new DatabaseStudent();
+            String sql = "select det_val from user_details where det_name='password'";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            rs.next();
+            String x = rs.getString(1);
+            db.closeConnections();
+            HomePage form = new HomePage(x);
+            this.setVisible(false);
+            form.setVisible(true);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_backbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,13 +311,11 @@ public class AttendanceForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel per1;
     private javax.swing.JLabel per2;
     private javax.swing.JLabel per3;

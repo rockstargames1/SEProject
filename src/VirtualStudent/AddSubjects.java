@@ -8,6 +8,7 @@ package VirtualStudent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,7 @@ DatabaseStudent db;
         initComponents();
         db = new DatabaseStudent();
         createSubjectsTable();
+        setButtonIcons();
     }
 
     /**
@@ -54,6 +56,9 @@ DatabaseStudent db;
         jTextField3.setText("Total");
 
         addSubject.setText("Add Subject");
+        addSubject.setMaximumSize(new java.awt.Dimension(120, 30));
+        addSubject.setMinimumSize(new java.awt.Dimension(120, 30));
+        addSubject.setPreferredSize(new java.awt.Dimension(120, 30));
         addSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addSubjectActionPerformed(evt);
@@ -61,6 +66,9 @@ DatabaseStudent db;
         });
 
         addttable.setText("Add Time Table");
+        addttable.setMaximumSize(new java.awt.Dimension(120, 30));
+        addttable.setMinimumSize(new java.awt.Dimension(120, 30));
+        addttable.setPreferredSize(new java.awt.Dimension(120, 30));
         addttable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addttableActionPerformed(evt);
@@ -82,11 +90,10 @@ DatabaseStudent db;
                                 .addComponent(jTextField3))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(addSubject))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(addttable)))
+                        .addGap(222, 222, 222)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addttable, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(226, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,11 +105,11 @@ DatabaseStudent db;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(addSubject)
-                .addGap(18, 18, 18)
-                .addComponent(addttable)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(addSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(addttable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,5 +195,10 @@ DatabaseStudent db;
     } catch (SQLException ex) {
         System.err.println(ex);
     }
+    }
+
+    private void setButtonIcons() {
+        addSubject.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Notification\\addsubjectsbutton.png"));
+        addttable.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Notification\\addtimetablebutton.png"));
     }
 }

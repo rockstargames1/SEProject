@@ -23,14 +23,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Component id="dbs" alignment="1" max="32767" attributes="0"/>
                       <Component id="se" alignment="1" max="32767" attributes="0"/>
-                      <Component id="cnw" alignment="1" pref="88" max="32767" attributes="0"/>
+                      <Component id="cnw" alignment="1" min="-2" pref="88" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -47,14 +47,19 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="236" max="32767" attributes="0"/>
+              <EmptySpace pref="204" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="backbutton" min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="backbutton" min="-2" pref="50" max="-2" attributes="0"/>
+              <EmptySpace pref="89" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -74,7 +79,7 @@
                   <Component id="gbr" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cnw" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="100" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,26 +104,46 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="MATHS"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mathsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="se">
       <Properties>
         <Property name="text" type="java.lang.String" value="SE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="comp">
       <Properties>
         <Property name="text" type="java.lang.String" value="COMP"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="compActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cnw">
       <Properties>
         <Property name="text" type="java.lang.String" value="CNW"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cnwActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="gbr">
       <Properties>
         <Property name="text" type="java.lang.String" value="GBR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gbrActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="backbutton">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbuttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

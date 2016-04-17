@@ -5,11 +5,15 @@
  */
 package VirtualStudent;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +34,12 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
     
     public BudgetPlannerForm() {
         initComponents();
+        setSize(700,600);
+        this.setTitle("Virtual Student");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setResizable(false);
+        backbutton.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Images\\back_button.png"));
         db = new DatabaseStudent();
         updateBudget();
         loadData();
@@ -45,6 +54,8 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jLabel1 = new javax.swing.JLabel();
         deposit = new javax.swing.JButton();
         expdCheck = new javax.swing.JButton();
@@ -52,9 +63,13 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
         withdraw = new javax.swing.JButton();
         extraExp = new javax.swing.JButton();
         addWeeklyExp = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        backbutton = new javax.swing.JButton();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,13 +118,14 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        backbutton.setMaximumSize(new java.awt.Dimension(50, 50));
+        backbutton.setMinimumSize(new java.awt.Dimension(50, 50));
+        backbutton.setPreferredSize(new java.awt.Dimension(50, 50));
+        backbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,13 +146,15 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
                             .addComponent(addWeeklyExp)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(313, 313, 313)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -150,7 +168,7 @@ public class BudgetPlannerForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(extraExp)
                     .addComponent(addWeeklyExp))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         pack();
@@ -353,6 +371,24 @@ catch(SQLException ex)
             System.err.println(ex);
         }
     }//GEN-LAST:event_expdCheckActionPerformed
+
+    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
+        try {
+            // TODO add your handling code here:
+            db = new DatabaseStudent();
+            String sql = "select det_val from user_details where det_name='password'";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            rs.next();
+            String x = rs.getString(1);
+            db.closeConnections();
+            HomePage form = new HomePage(x);
+            this.setVisible(false);
+            form.setVisible(true);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_backbuttonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -392,13 +428,13 @@ catch(SQLException ex)
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UpdtExpd;
     private javax.swing.JButton addWeeklyExp;
+    private javax.swing.JButton backbutton;
     private javax.swing.JButton deposit;
     private javax.swing.JButton expdCheck;
     private javax.swing.JButton extraExp;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JButton withdraw;
     // End of variables declaration//GEN-END:variables
 

@@ -5,6 +5,11 @@
  */
 package VirtualStudent;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author kishl_000
@@ -17,6 +22,10 @@ public class FormulaeForm extends javax.swing.JFrame {
     public FormulaeForm() {
         initComponents();
         setSize(360,360);
+        this.setTitle("Virtual Student");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        setResizable(false);
         setResizable(false);
     }
 
@@ -29,13 +38,16 @@ public class FormulaeForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         trigo = new javax.swing.JButton();
         integral = new javax.swing.JButton();
         algebra = new javax.swing.JButton();
         physics = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        backbutton = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(2, 2));
@@ -73,10 +85,16 @@ public class FormulaeForm extends javax.swing.JFrame {
         getContentPane().add(physics);
 
         jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        backbutton.setText("Back");
+        backbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbuttonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(backbutton);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -115,6 +133,25 @@ public class FormulaeForm extends javax.swing.JFrame {
         f1.setVisible(true);
     }//GEN-LAST:event_physicsActionPerformed
 
+    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            DatabaseStudent db = new DatabaseStudent();
+            String sql = "select det_val from user_details where det_name='password'";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            rs.next();
+            String x = rs.getString(1);
+            db.closeConnections();
+            HomePage form = new HomePage(x);
+            this.setVisible(false);
+            form.setVisible(true);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_backbuttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,10 +189,11 @@ public class FormulaeForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton algebra;
+    private javax.swing.JMenuItem backbutton;
     private javax.swing.JButton integral;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton physics;
     private javax.swing.JButton trigo;
     // End of variables declaration//GEN-END:variables

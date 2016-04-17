@@ -5,11 +5,16 @@
  */
 package VirtualStudent;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
@@ -28,6 +33,12 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
      */
     public UpdateAttendanceForm() {
         initComponents();
+        setSize(620,500);
+        this.setTitle("Virtual Student");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        setResizable(false);
+        backbutton.setIcon(new ImageIcon("C:\\Users\\kishl_000\\OneDrive\\Documents\\Images\\back_button.png"));
         count=-1;
         createFormFromData();   // create a form according to today's day
     }
@@ -48,9 +59,7 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         day = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        backbutton = new javax.swing.JButton();
 
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
@@ -85,22 +94,23 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        backbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
                         .addComponent(subject)
                         .addGap(128, 128, 128)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,16 +119,17 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
                             .addComponent(jRadioButton1)
                             .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
+                        .addGap(192, 192, 192)
                         .addComponent(day)))
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(day)
-                .addGap(57, 57, 57)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(subject))
@@ -128,7 +139,7 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
                 .addComponent(jRadioButton3)
                 .addGap(40, 40, 40)
                 .addComponent(jButton1)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,6 +195,25 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            db = new DatabaseStudent();
+            String sql = "select det_val from user_details where det_name='password'";
+            System.out.println(sql);
+            ResultSet rs = db.stmt.executeQuery(sql);
+            rs.next();
+            String x = rs.getString(1);
+            db.closeConnections();
+            HomePage form = new HomePage(x);
+            this.setVisible(false);
+            form.setVisible(true);
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }//GEN-LAST:event_backbuttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,12 +250,10 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbutton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel day;
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -267,8 +295,12 @@ public class UpdateAttendanceForm extends javax.swing.JFrame {
                 day.setText("Saturday");
                 break;
                 case Calendar.SUNDAY:    
-                sql = "select * from attendance where subject in (select subject from timetable where day like 'Sunday');";
-                day.setText("Sunday");
+                    subject.setVisible(false);
+               jRadioButton1.setVisible(false);
+               jRadioButton2.setVisible(false);
+               jRadioButton3.setVisible(false);
+               jButton1.setVisible(false);
+               day.setText("It's Sunday!!");
                 break;
             }
                     
